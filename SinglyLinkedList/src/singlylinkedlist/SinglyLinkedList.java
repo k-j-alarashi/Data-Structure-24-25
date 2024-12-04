@@ -70,23 +70,26 @@ public class SinglyLinkedList<E> {
             head = null;
             tail = null;
         }
-        Node<E> current = head;
-        while (current != tail) {
-            current = current.getNext();
+        else{
+            
+        Node<E> temp = head;
+        while (temp.getNext() != tail) {
+            temp = temp.getNext();
         }
-        current.setNext(null);
-        tail = current;
+        temp.setNext(null);
+        tail = temp;
         size--;
+        }
         return delete;
     }
 
     public void display() {
-        Node<E> current = head;
-        while (current != null) {
-            System.out.print(current.getData() + "---->");
-            current = current.getNext();
+        Node<E> temp = head;
+        while (temp != null) {
+            System.out.print(temp.getData() + "---->");
+            temp = temp.getNext();
         }
-        System.out.print("null\n");
+        System.out.print("null \n");
     }
 
     public void addAtPosition(E element, int position) {
@@ -95,15 +98,15 @@ public class SinglyLinkedList<E> {
             newNode.setNext(head);
             head = newNode;
         } else {
-            Node<E> current = head;
+            Node<E> temp = head;
             int count = 1;
             while (count < position - 1) {
-                current = current.getNext();
+                temp = temp.getNext();
                 count++;
             }
-            Node<E> temp = current.getNext();
-            current.setNext(newNode);
-            newNode.setNext(temp);
+            Node<E> change = temp.getNext();
+            temp.setNext(newNode);
+            newNode.setNext(change);
         }
     }
 
@@ -133,5 +136,4 @@ public class SinglyLinkedList<E> {
             this.next = next;
         }
     }
-
 }
