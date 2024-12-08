@@ -14,8 +14,8 @@ public class SinglyLinkedList<E> {
         return size() == 0;
     }
 
-    public void addFirst(E element) {
-        Node<E> newNode = new Node(element, head);
+    public void addFirst(E data) {
+        Node<E> newNode = new Node(data, head);
         head = newNode;
         if (size() == 0) {
             tail = head;
@@ -43,8 +43,8 @@ public class SinglyLinkedList<E> {
         return delete;
     }
 
-    public void addLast(E element) {
-        Node<E> newNode = new Node(element, null);
+    public void addLast(E data) {
+        Node<E> newNode = new Node(data, null);
         if (isEmpty()) {
             head = newNode;
         } else {
@@ -69,17 +69,16 @@ public class SinglyLinkedList<E> {
         if (head == tail) {
             head = null;
             tail = null;
+        } else {
+
+            Node<E> temp = head;
+            while (temp.getNext() != tail) {
+                temp = temp.getNext();
+            }
+            temp.setNext(null);
+            tail = temp;
         }
-        else{
-            
-        Node<E> temp = head;
-        while (temp.getNext() != tail) {
-            temp = temp.getNext();
-        }
-        temp.setNext(null);
-        tail = temp;
         size--;
-        }
         return delete;
     }
 
@@ -92,8 +91,8 @@ public class SinglyLinkedList<E> {
         System.out.print("null \n");
     }
 
-    public void addAtPosition(E element, int position) {
-        Node<E> newNode = new Node(element, null);
+    public void addAtPosition(E data, int position) {
+        Node<E> newNode = new Node(data, null);
         if (position == 1) {
             newNode.setNext(head);
             head = newNode;
