@@ -114,8 +114,8 @@ public class SinglyLinkedList<E> {
         private E data;
         private Node<E> next;
 
-        public Node(E element, Node<E> next) {
-            this.data = element;
+        public Node(E data, Node<E> next) {
+            this.data = data;
             this.next = next;
         }
 
