@@ -21,10 +21,10 @@ public class DoublyLinkedList<E> {
         return size() == 0;
     }
 
-    private void addBetween(Node<E> prev, E data, Node<E> next) {
-        Node<E> newNode = new Node(prev, data, next);
-        prev.setNext(newNode);
-        next.setPrev(newNode);
+    private void addBetween(Node<E> left, E data, Node<E> right) {
+        Node<E> newNode = new Node(left, data, right);
+        left.setNext(newNode);
+        right.setPrev(newNode);
         size++;
     }
 
@@ -52,34 +52,26 @@ public class DoublyLinkedList<E> {
 
     private E removeBetween(Node<E> deletedNode) {
         if(head.getNext()==tail) return null;
-        Node<E> prev = deletedNode.getPrev();
-        Node<E> next = deletedNode.getNext();
+        Node<E> left = deletedNode.getPrev();
+        Node<E> right = deletedNode.getNext();
         E delete = deletedNode.getData();
-        prev.setNext(next);
-        next.setPrev(prev);
+        left.setNext(right);
+        right.setPrev(left);
         size--;
         return delete;
     }
 
     public E removeFirst() {
-        if (isEmpty()) {
-            return null;
-        }
         return removeBetween(head.getNext());
     }
 
     public E removeLast() {
-        if (isEmpty()) {
-            return null;
-        }
         return removeBetween(tail.getPrev());
     }
 
     public void display() {
-        Node<E> temp = head;
+        Node<E> temp = head.getNext();
         System.out.print("null <--- head <-----> ");
-
-        temp = temp.getNext();
         while (temp != tail) {
             System.out.print(temp.getData() + " <-----> ");
             temp = temp.getNext();
