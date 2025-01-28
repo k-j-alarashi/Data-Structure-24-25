@@ -1,6 +1,8 @@
 package LinkedPositionalList;
 
-public class LinkedPositionalList<E> implements PositionalList<E> {
+import java.util.Iterator;
+
+public class LinkedPositionalList<E> implements PositionalList<E> , Iterable<E> {
 
     private Node<E> head;
     private Node<E> tail;
@@ -113,6 +115,44 @@ public class LinkedPositionalList<E> implements PositionalList<E> {
         return oldNode;
     }
 
+    @Override
+    public Iterator<E> iterator() {
+        return new ElementIterator();
+    }
+    
+    public class ElementIterator implements Iterator<E>{
+        Iterator<Position<E>> posIterator = new PositionalIterator();
+        
+        @Override
+        public boolean hasNext() {
+            return posIterator.hasNext();
+        }
+
+        @Override
+        public E next() {
+            return posIterator.next().getData();
+        }
+    }
+    
+    public class PositionalIterator implements Iterator<Position<E>>{
+        Position<E> recent = null ;
+        Position<E> cursor = first();
+        
+        @Override
+        public boolean hasNext() {
+            return cursor!=null;
+        }
+
+        @Override
+        public Position<E> next() {
+            if(cursor==null)
+                System.out.println("No Node to display ..!");
+            recent = cursor ;
+            cursor = after(cursor);
+            return recent;
+        }
+    }
+    
     private class Node<E> implements Position<E> {
 
         private Node<E> prev;
